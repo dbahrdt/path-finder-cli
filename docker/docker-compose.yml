@@ -1,3 +1,4 @@
+#Run with docker-compose run path-finder-cli (gdb|valgrind|ultra|asan)
 version: '3.6'
 
 services:
