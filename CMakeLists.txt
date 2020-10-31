@@ -17,12 +17,14 @@ include(add_buildtype_ultra)
 include(add_buildtype_ultra_sanitize)
 include(add_buildtype_sanitize_debug)
 
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+find_package(Threads REQUIRED)
+
 add_subdirectory(vendor/path_finder)
 add_subdirectory(vendor/oscar-routing)
 
 add_executable(file_creator FileCreator.cpp CLI11.hpp)
 add_executable(run_from_files RunFromFiles.cpp)
 
-target_link_libraries(file_creator path_finder oscar-routing)
-target_link_libraries(run_from_files path_finder oscar-routing)
-set(CMAKE_CXX_FLAGS "-pthread")
+target_link_libraries(file_creator PRIVATE path_finder oscar-routing Threads::Threads)
+target_link_libraries(run_from_files PRIVATE path_finder oscar-routing Threads::Threads)
