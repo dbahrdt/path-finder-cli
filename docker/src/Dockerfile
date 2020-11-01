@@ -44,10 +44,8 @@ RUN git fetch \
 	&& cd vendor/path_finder \
 	&& git fetch dbahrdt \
 	&& cd ../../ \
-	&& git checkout 46a7be90bde8dca8765d33fb6be69e92d489742d \
-	&& git submodule update --init --recursive \
-	&& cd vendor/path_finder \
-	&& git checkout 77598df6ce44fabd87bd6d96347794ab31497030
+	&& git checkout 027d0a8cf84dadf4941979add82fffbe94cece0a  \
+	&& git submodule update --init --recursive
 
 # Variant for cgdb
 WORKDIR ${SRC_DIR}/PathFinderCli/build
