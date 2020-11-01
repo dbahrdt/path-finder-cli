@@ -49,14 +49,18 @@ RUN git fetch \
 	&& cd vendor/path_finder \
 	&& git checkout 77598df6ce44fabd87bd6d96347794ab31497030
 
-#Variant for cgdb
+# Variant for cgdb
 WORKDIR ${SRC_DIR}/PathFinderCli/build
 RUN cmake -DCMAKE_BUILD_TYPE=ultrasanitize ../
 RUN make -j ${NUM_THREADS:-4}
 
-#Variant for valgrind
+# Variant for valgrind
 WORKDIR ${SRC_DIR}/PathFinderCli/build_ultra
 RUN cmake -DCMAKE_BUILD_TYPE=ultra ../
+RUN make -j ${NUM_THREADS:-4}
+
+WORKDIR ${SRC_DIR}/PathFinderCli/build_release
+RUN cmake -DCMAKE_BUILD_TYPE=Release ../
 RUN make -j ${NUM_THREADS:-4}
 
 RUN chown -R builder:builder ${SRC_DIR} 
