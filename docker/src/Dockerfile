@@ -2,7 +2,7 @@ FROM ubuntu:20.04 AS Base
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-ENV CMAKE_GCC_VERSION_FOR_LTO=9
+ENV CMAKE_GCC_VERSION_FOR_LTO=10
 
 ARG SRC_DIR="/home/builder/src"
 ENV SRC_DIR="${SRC_DIR}"
@@ -20,7 +20,7 @@ RUN apt-get update \
 		libz-dev libicu-dev libcairo-dev libprotobuf-dev \
 		protobuf-compiler libcrypto++-dev libcgal-dev \
 		git-core curl python ca-certificates \
-		cgdb valgrind \
+		cgdb valgrind libtbb-dev \
 	&& apt-get clean autoclean \
 	&& apt-get autoremove --yes \
 	&& rm -rf /var/lib/{apt,dpkg,cache,log}
