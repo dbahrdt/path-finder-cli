@@ -26,6 +26,9 @@ int main(int argc, char *argv[]) {
 
   std::string outPutPath;
   app.add_option("-o, --out", outPutPath, "Output path.")->required();
+  
+  std::size_t numThreads{1};
+  app.add_option("-t, --threads", numThreads, "Number of threads to use");
 
   bool gridReorder = true;
 
@@ -53,7 +56,9 @@ int main(int argc, char *argv[]) {
     std::cout << "Mapping edges to cell ids" << std::endl;
     pathFinder::OscarIntegrator::writeCellIdsForEdges<sserialize::spatial::GeoPoint, liboscar::routing::support::Edge2CellIds>(
         *chGraph, *cellIdStore,
-        cmp.store());
+        cmp.store(),
+		numThreads
+	);
   }
 
   if(oscarFilePath.empty())
